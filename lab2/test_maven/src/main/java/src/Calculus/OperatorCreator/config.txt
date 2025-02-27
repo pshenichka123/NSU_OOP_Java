@@ -1,0 +1,8 @@
+#
+Define
+Divide
+Minus
+Multiply
+Plus
+Pop
+Print
