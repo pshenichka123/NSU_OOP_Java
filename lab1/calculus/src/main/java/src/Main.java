@@ -23,7 +23,7 @@ public class Main {
             String[] parcedTokens=Parcer.parce(line);
             calculus.operator= OperatorCreator.create(parcedTokens[0]);
             assert calculus.operator != null;
-            calculus.operator.act(calculus.context,parcedTokens);
+            calculus.act(parcedTokens);
 
         }
 
