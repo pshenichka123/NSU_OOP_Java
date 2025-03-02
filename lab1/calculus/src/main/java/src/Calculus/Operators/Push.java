@@ -3,7 +3,7 @@ package src.Calculus.Operators;
 import src.Calculus.Context;
 
 public class Push extends  Operators{
-    public  int act(Context context, String[] parcedLine) {
+    public  int act(Context context, String[] parcedLine) throws Exception {
         String param = parcedLine[1];
         try {
             Double number = Double.parseDouble(param);
@@ -14,8 +14,8 @@ public class Push extends  Operators{
                 context.push(context.get_param_value(param));
                 return  0;
             } else {
-                System.out.println("'" + param + "'" + "Not a number, define it ");
-                return 0;
+
+                throw new Exception("Unrecognized param:"+param);
             }
         }
 

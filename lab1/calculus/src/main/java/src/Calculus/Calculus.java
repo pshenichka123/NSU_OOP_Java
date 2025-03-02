@@ -11,7 +11,7 @@ public class Calculus {
  }
 
 
- public void act(String[] parcedline){
+ public void act(String[] parcedline) throws Exception {
       operator.act(context,parcedline);
 
  }

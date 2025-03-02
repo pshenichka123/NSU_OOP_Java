@@ -4,17 +4,15 @@ import src.Calculus.Context;
 
 public class  Minus extends Operators
 {
-    public   int act(Context context, String[] parcedLine){
+    public   int act(Context context, String[] parcedLine) throws Exception {
         if(context.is_numbers_empty())
         {
-            System.out.println("Not enough numbers to do:"+ parcedLine[0]);
-            return -1;
+            throw new Exception("No enough numbers:2");
         }
         Double num1=context.pop();
         if(context.is_numbers_empty())
         {
-            System.out.println("Not enough numbers to do:"+ parcedLine[0]);
-            return -1;
+            throw new Exception("Stack is empty");
         }
         Double num2=context.pop();
         context.push(num2-num1);

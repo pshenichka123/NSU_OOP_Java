@@ -4,13 +4,16 @@ import src.Calculus.Context;
 
 public class Sqrt extends Operators{
 
-    public int act(Context context, String[] parcedLine){
+    public int act(Context context, String[] parcedLine) throws Exception {
         if(context.is_numbers_empty())
         {
-            System.out.println("Not enough numbers to do:"+ parcedLine[0]);
-            return -1;
+            throw new Exception("Stack is empty");
         }
         double top_num  = context.pop();
+        if(top_num<0)
+        {
+            throw new Exception(":"+Double.toString(top_num)+"is less than 0");
+        }
         context.push(Math.sqrt(top_num));
         return  0;
     }
