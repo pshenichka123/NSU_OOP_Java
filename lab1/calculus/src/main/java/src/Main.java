@@ -10,10 +10,15 @@ import src.Calculus.Operators.Operators;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) throws Exception {
-
+        InputStream inputStream;
+        if(args.length==0)
+        {
+           inputStream=System.in;
+        }
+        else{
         String filePath = args[0]; // Путь к вашему файлу
-
-        InputStream inputStream = new FileInputStream(filePath);
+        inputStream = new FileInputStream(filePath);
+        }
         InputStreamReader inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
         BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
         String line;
@@ -25,7 +30,7 @@ public class Main {
             calculus.operator= OperatorCreator.create(parcedTokens[0]);
             assert calculus.operator != null;
             try {
-                logger.log(Level.INFO,"Doing" + parcedTokens[0]);
+                logger.log(Level.INFO,"Doing " + parcedTokens[0]);
                 calculus.act(parcedTokens);
             }catch (Exception e)
             {
