@@ -25,7 +25,7 @@ public class Main {
             calculus.operator= OperatorCreator.create(parcedTokens[0]);
             assert calculus.operator != null;
             try {
-                logger.log(Level.INFO,"Trying" + parcedTokens[0]);
+                logger.log(Level.INFO,"Doing" + parcedTokens[0]);
                 calculus.act(parcedTokens);
             }catch (Exception e)
             {
