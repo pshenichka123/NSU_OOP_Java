@@ -28,13 +28,13 @@ public class Main {
         {
             String[] parcedTokens=Parcer.parce(line);
             calculus.operator= OperatorCreator.create(parcedTokens[0]);
-            assert calculus.operator != null;
-            try {
-                logger.log(Level.INFO,"Doing " + parcedTokens[0]);
-                calculus.act(parcedTokens);
-            }catch (Exception e)
-            {
-                logger.log(Level.WARNING,e.getMessage());
+            if(calculus.operator!=null) {
+                try {
+                    logger.log(Level.INFO, "Doing " + parcedTokens[0]);
+                    calculus.act(parcedTokens);
+                } catch (Exception e) {
+                    logger.log(Level.WARNING, e.getMessage());
+                }
             }
         }
 

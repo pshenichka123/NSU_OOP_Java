@@ -14,13 +14,10 @@ public class OperatorCreator {
         String className=operatorName;
 
         try {
-            // Загружаем класс AdditionOperator динамически
             Class<?> clazz = Class.forName("src.Calculus.Operators."+ className);
 
-            // Создаём объект типа Operator
             Object command = clazz.getDeclaredConstructor().newInstance();
 
-            // Проверяем и приводим к интерфейсу Operator
             if (command instanceof Operators) {
                 return   (Operators) command;
                 } else {
@@ -32,7 +29,7 @@ public class OperatorCreator {
             e.printStackTrace();
         }
 
-        System.out.println("Объект не является ничем");
+        System.out.println("введена некорректна комманда");
         return null;
 
 
