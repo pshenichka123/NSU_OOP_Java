@@ -20,7 +20,7 @@ public class OperatorCreator {
 
             if (command instanceof Operators) {
                 return   (Operators) command;
-                } else {
+            } else {
                 System.out.println("Объект не является типом Operators.");
                 return   null;
             }

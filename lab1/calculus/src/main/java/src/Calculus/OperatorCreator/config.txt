@@ -1,8 +1,8 @@
 #
-Define
-Divide
-Minus
-Multiply
-Plus
-Pop
-Print
+Define  src.Calculus.Operators.Define
+Divide src.Calculus.Operators.Divide
+Minus src.Calculus.Operators.Minus
+Multiply src.Calculus.Operators.Minus
+Plus src.Calculus.Operators.Plus
+Pop src.Calculus.Operators.Pop
+Print src.Calculus.Operators.Print

@@ -9,6 +9,10 @@ import src.Calculus.Operators.Operators;
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
+    //TODO
+    //1. Конфиг переделать
+    //3. Обработка не найденных команд
+    //4. Тесты
     public static void main(String[] args) throws Exception {
         InputStream inputStream;
         if(args.length==0)
@@ -16,7 +20,7 @@ public class Main {
            inputStream=System.in;
         }
         else{
-        String filePath = args[0]; // Путь к вашему файлу
+        String filePath = args[0];
         inputStream = new FileInputStream(filePath);
         }
         InputStreamReader inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
@@ -24,14 +28,18 @@ public class Main {
         String line;
         Calculus calculus=new Calculus();
         Logger logger = Logger.getLogger(("Calculus_logger"));
+        Operators.class.getResourceAsStream("config.txt");
+
         while( (line = bufferedReader.readLine())!=null)
         {
-            String[] parcedTokens=Parcer.parce(line);
-            calculus.operator= OperatorCreator.create(parcedTokens[0]);
+            String[] parsedTokens=Parcer.parce(line);
+            if(parsedTokens.length==0 || parsedTokens[0].isEmpty())
+            {continue;}
+            calculus.operator= OperatorCreator.create(parsedTokens[0]);
             if(calculus.operator!=null) {
                 try {
-                    logger.log(Level.INFO, "Doing " + parcedTokens[0]);
-                    calculus.act(parcedTokens);
+                    logger.log(Level.INFO, "Doing " + parsedTokens[0]);
+                    calculus.act(parsedTokens);
                 } catch (Exception e) {
                     logger.log(Level.WARNING, e.getMessage());
                 }
