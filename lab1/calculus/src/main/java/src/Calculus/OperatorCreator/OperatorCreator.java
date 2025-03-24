@@ -4,17 +4,50 @@ import src.Calculus.Operators.Operators;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.security.KeyPair;
+import java.util.Map;
 import java.util.Objects;
 
 public class OperatorCreator {
 
-    public static Operators create(String operatorName) throws IOException {
+
+
+    InputStream inputStream;
+    InputStreamReader inputStreamReader;
+    BufferedReader bufferedReader ;
+
+    public OperatorCreator(){
+        String config_name="config.txt";
+        InputStream inputStream = getClass().getResourceAsStream(config_name);
+        assert inputStream != null;
+        InputStreamReader inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
+        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+    }
+
+    public Operators create(String operatorName) throws IOException {
 
         String line;
-        String className=operatorName;
+        boolean foundOperatorName=false;
+        String class_absolute_path = null;
+
+        String config_line;
+        while ((config_line=bufferedReader.readLine())!=null) {
+
+            String[] pair=config_line.split(" ");
+            if(pair[0].equalsIgnoreCase(operatorName)) {
+            class_absolute_path=pair[1];
+            foundOperatorName=true;
+            break;
+            }
+
+        }
+    if(!foundOperatorName) {
+        System.out.println("введена некорректна комманда");
+        return null;
+    }
 
         try {
-            Class<?> clazz = Class.forName("src.Calculus.Operators."+ className);
+            Class<?> clazz = Class.forName(class_absolute_path);
 
             Object command = clazz.getDeclaredConstructor().newInstance();
 

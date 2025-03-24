@@ -16,4 +16,15 @@ public class PlusTest {
         plus.act(context,string);
         Assertions.assertEquals(6,context.pop());
     }
+    @Test
+    void test2() throws Exception {
+        Context context=new Context();
+        context.push(4.0);
+        String[] string ={"Plus"};
+        Plus plus=new Plus();
+        Exception exception = Assertions.assertThrows(Exception.class, () -> {
+            plus.act(context, string);
+        });
+        Assertions.assertEquals(4, context.pop());
+    }
 }

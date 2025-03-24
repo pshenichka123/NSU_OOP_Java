@@ -18,5 +18,19 @@ public class MultiplyTest {
 
 
     }
+    @Test
+    void test2() throws Exception {
+        Context context=new Context();
+        context.push(4.0);
+
+        String[] string ={"Multiply"};
+        Multiply multiply=new Multiply();
+        Exception exception = Assertions.assertThrows(Exception.class, () -> {
+            multiply.act(context, string);
+        });
+        Assertions.assertEquals(4, context.pop());
+
+
+    }
 
 }

@@ -8,14 +8,23 @@ public class Divide extends Operators{
         {
             throw new Exception("No enough numbers:2");
         }
-    Double num1=context.pop();
+        Double num1=context.pop();
         if(context.is_numbers_empty())
         {
+            context.push(num1);
+
             throw new Exception("Stack is empty");
         }
-    Double num2=context.pop();
-    context.push(num2/num1);        //наоборот??
-    return 0;
+
+        Double num2=context.pop();
+        if(num1==0){
+            context.push(num1);
+            context.push(num2);
+            throw new Exception("Division by zero, numbers returned on stack");
+        }
+
+        context.push(num2/num1);        //наоборот??
+        return 0;
     }
 
 }

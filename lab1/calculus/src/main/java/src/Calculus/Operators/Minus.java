@@ -12,6 +12,7 @@ public class  Minus extends Operators
         Double num1=context.pop();
         if(context.is_numbers_empty())
         {
+            context.push(num1);
             throw new Exception("Stack is empty");
         }
         Double num2=context.pop();

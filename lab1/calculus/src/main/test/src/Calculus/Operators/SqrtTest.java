@@ -16,4 +16,21 @@ public class SqrtTest {
         sqrt.act(context,string);
         Assertions.assertEquals(3,context.pop());
     }
+
+
+    @Test
+    void  test2() throws Exception {
+        Sqrt sqrt=new Sqrt();
+        Context context=new Context();
+        context.push(-9.0);
+        String[] string ={"Sqrt"};
+
+        Exception exception = Assertions.assertThrows(Exception.class, () -> {
+            sqrt.act(context, string);
+        });
+        Assertions.assertEquals(-9, context.pop());
+    }
+
+
+
 }

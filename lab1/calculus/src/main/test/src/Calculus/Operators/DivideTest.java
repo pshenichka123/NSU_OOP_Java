@@ -16,5 +16,16 @@ public class DivideTest {
         divide.act(context,string);
         Assertions.assertEquals(2,context.pop());
     }
+    @Test
+    void test2() throws Exception {
+        Context context=new Context();
+        context.push(4.0);
+        context.push(0.0);
+        String[] string ={"Divide"};
+        Divide divide=new Divide();
+        Exception exception = Assertions.assertThrows(Exception.class, () -> {
+            divide.act(context, string);
+        });
+    }
 
 }

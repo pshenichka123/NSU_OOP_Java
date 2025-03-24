@@ -11,6 +11,7 @@ import src.Calculus.Operators.Operators;
 public class Main {
     //TODO
     //1. Конфиг переделать
+    //2. Обработка пустых строк
     //3. Обработка не найденных команд
     //4. Тесты
     public static void main(String[] args) throws Exception {
@@ -28,14 +29,15 @@ public class Main {
         String line;
         Calculus calculus=new Calculus();
         Logger logger = Logger.getLogger(("Calculus_logger"));
-        Operators.class.getResourceAsStream("config.txt");
+        OperatorCreator operatorCreator=new OperatorCreator();
 
         while( (line = bufferedReader.readLine())!=null)
         {
             String[] parsedTokens=Parcer.parce(line);
             if(parsedTokens.length==0 || parsedTokens[0].isEmpty())
             {continue;}
-            calculus.operator= OperatorCreator.create(parsedTokens[0]);
+
+            calculus.operator= operatorCreator.create(parsedTokens[0]);
             if(calculus.operator!=null) {
                 try {
                     logger.log(Level.INFO, "Doing " + parsedTokens[0]);
