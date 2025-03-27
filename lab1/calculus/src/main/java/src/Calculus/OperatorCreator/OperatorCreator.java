@@ -12,24 +12,16 @@ public class OperatorCreator {
 
 
 
-    InputStream inputStream;
-    InputStreamReader inputStreamReader;
-    BufferedReader bufferedReader ;
-
-    public OperatorCreator(){
-        String config_name="config.txt";
-        InputStream inputStream = getClass().getResourceAsStream(config_name);
-        assert inputStream != null;
-        InputStreamReader inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
-        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-    }
-
     public Operators create(String operatorName) throws IOException {
 
         String line;
         boolean foundOperatorName=false;
         String class_absolute_path = null;
-
+        String config_name="/config.txt";
+        InputStream inputStream = getClass().getResourceAsStream(config_name);
+        assert inputStream != null;
+        InputStreamReader inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
+        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
         String config_line;
         while ((config_line=bufferedReader.readLine())!=null) {
 

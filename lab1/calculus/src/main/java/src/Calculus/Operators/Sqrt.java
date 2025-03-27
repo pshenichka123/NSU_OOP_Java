@@ -14,7 +14,7 @@ public class Sqrt extends Operators{
         {
             context.push(top_num);
 
-            throw new Exception(":"+Double.toString(top_num)+"is less than 0");
+            throw new Exception(":"+Double.toString(top_num)+"is less than 0, cant do it");
         }
         context.push(Math.sqrt(top_num));
         return  0;
