@@ -9,7 +9,7 @@ public class NewGameWindow extends JFrame {
         new JFrame("Про Мин Нет");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
-        String text ="";
+        String text = "";
         JPanel aboutText = new JPanel(new FlowLayout());
         aboutText.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         JTextArea jTextArea = new JTextArea(text);

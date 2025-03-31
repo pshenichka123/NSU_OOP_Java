@@ -32,14 +32,14 @@ public class MenuPanel extends JPanel {
     HighScoresButton highScoresButton;
     NewGameButton newGameButton;
 
-    MenuPanel(){
+    MenuPanel() {
         new JPanel(new FlowLayout(FlowLayout.LEFT));
         setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
-        add(newGameButton= new NewGameButton());
-        add(aboutButton=new AboutButton());
-        add(exitButton=new ExitButton());
-        add(highScoresButton=new HighScoresButton());
+        add(newGameButton = new NewGameButton());
+        add(aboutButton = new AboutButton());
+        add(exitButton = new ExitButton());
+        add(highScoresButton = new HighScoresButton());
 
     }
 }

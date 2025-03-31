@@ -1,18 +1,16 @@
 package View;
 
-import View.buttons.AboutButton;
-import View.buttons.ExitButton;
-import View.buttons.HighScoresButton;
-import View.buttons.NewGameButton;
+import Model.Minefield.Minefield;
 import View.windows.AboutWindow;
 import View.windows.LeaderboardWindow;
 import View.windows.NewGameWindow;
 import View.windows.mainWindow.MainWindow;
+import View.windows.mainWindow.VisualMinefield;
 
 import javax.swing.*;
 import java.awt.*;
 
-public  class View {
+public class View {
 
     AboutWindow aboutWindow;
     NewGameWindow newGameWindow;
@@ -20,37 +18,84 @@ public  class View {
     LeaderboardWindow leaderboardWindow;
 
 
-    public View() {
-        mainWindow = new MainWindow(){};
+    public View(Minefield minefield) {
+        mainWindow = new MainWindow(minefield) {
+        };
     }
 
 
+    public void showMainWindow(Minefield minefield) {
+        if (mainWindow == null) {
+            mainWindow = new MainWindow(minefield);
+        }
+        mainWindow.setVisible(true);
+    }
 
+    public void showAboutWindow() {
+        if (aboutWindow == null) {
+            aboutWindow = new AboutWindow();
+        }
+        aboutWindow.setVisible(true);
+    }
 
-    public void showMainWindow(){mainWindow.show();}
-    public  void  showAboutWindow(){aboutWindow.show();}
-    public  void showNewGameWindow(){newGameWindow.show();}
-    public void showLeaderboardWindow(){leaderboardWindow.show();}
-    public void showAll(){
+    public void showNewGameWindow() {
+        if (newGameWindow == null) {
+            newGameWindow = new NewGameWindow();
+        }
+        newGameWindow.setVisible(true);
+    }
+
+    public void showLeaderboardWindow() {
+        if (leaderboardWindow == null) {
+            leaderboardWindow = new LeaderboardWindow();
+        }
+        leaderboardWindow.setVisible(true);
+    }
+
+    public void showAll(Minefield minefield) {
         showAboutWindow();
-        showMainWindow();
+        showMainWindow(minefield);
         showNewGameWindow();
         showLeaderboardWindow();
     }
-    public void closeAll(){}
 
-
-
-    public Button getNewGameButton() {
-    mainWindow.get
+    public void closeMainWindow() {
+        if (mainWindow != null) mainWindow.dispose();
     }
 
-    public Button getExitButton() {
+    public void closeAboutWindow() {
+        if (aboutWindow != null) aboutWindow.dispose();
     }
 
-    public Button getAboutButton() {
+    public void closeNewGameWindow() {
+        if (newGameWindow != null) newGameWindow.dispose();
     }
 
-    public Button getHighScoresButton() {
+    public void closeAll() {
+        closeMainWindow();
+        closeAboutWindow();
+        closeNewGameWindow();
     }
+
+
+    public JButton getNewGameButton() {
+        return mainWindow.getNewGameButton();
+    }
+
+    public JButton getExitButton() {
+        return mainWindow.getExitButton();
+    }
+
+    public JButton getAboutButton() {
+        return mainWindow.getAboutButton();
+    }
+
+    public JButton getHighScoresButton() {
+        return mainWindow.getHighScoresButton();
+    }
+
+    public VisualMinefield getVisualMinefield() {
+        return mainWindow.getVisualMinefield();
+    }
+
 }
