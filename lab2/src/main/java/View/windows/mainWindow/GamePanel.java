@@ -25,6 +25,6 @@ public class GamePanel extends JPanel {
 
     public void update(Minefield minefield) {
 
-
+        visualMinefield.update(minefield);
     }
 }

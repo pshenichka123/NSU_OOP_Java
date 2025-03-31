@@ -56,4 +56,15 @@ public class Model {
     }
 
 
+    public void act(int i, int j) {
+
+        Cell cell = minefield.getCell(i, j);
+        if (cell.isMineHere()) {
+            setGameRunning(false);
+        }
+        cell.setOpened(true);
+        //chek opened nearby
+
+
+    }
 }

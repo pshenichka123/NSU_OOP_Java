@@ -5,23 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="62cdf26a-a6d6-4b49-9e95-9b7b62d06667" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Model/Minefield/Cell.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Model/Minefield/Minefield.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/View/windows/mainWindow/MineButton.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/View/windows/mainWindow/VisualMinefield.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/controller/FieldListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Minefield/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Minefield/Cell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Minefield/Minefield.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Minefield/Minefield.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Model/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Model.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/View/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/View.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/View/windows/AboutWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/windows/AboutWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/View/windows/LeaderboardWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/windows/LeaderboardWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/View/windows/NewGameWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/windows/NewGameWindow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/View/windows/mainWindow/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/windows/mainWindow/GamePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/View/windows/mainWindow/MainWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/windows/mainWindow/MainWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/View/windows/mainWindow/MenuPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/windows/mainWindow/MenuPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/View/windows/mainWindow/MineButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/windows/mainWindow/MineButton.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/View/windows/mainWindow/VisualMinefield.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/windows/mainWindow/VisualMinefield.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/FieldListener.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,16 +53,26 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Gradle.lab2 [:org.example.Main.main()].executor": "Debug",
+    "Gradle.lab2 [:org.example.Main.main()].executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "D:/OOP/NSU_OOP_Java/lab2",
-    "settings.editor.selected.configurable": "actions.on.save"
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.Color Scheme Font"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\OOP\NSU_OOP_Java\lab2\src\main\java" />
+      <recent name="D:\OOP\NSU_OOP_Java\lab2\src\main" />
+      <recent name="D:\OOP\NSU_OOP_Java\lab2\src\main\java\View\buttons" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.example.Main" />
@@ -99,5 +103,16 @@
       <updated>1742815671507</updated>
     </task>
     <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/View/View.java</url>
+          <line>155</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

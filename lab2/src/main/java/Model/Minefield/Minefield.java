@@ -44,7 +44,12 @@ public class Minefield {
 
     public Minefield(Integer[] size, Integer bombCount) {
         cells = new Cell[size1][size2];
-        List<Integer> idxWhereMine = sampleWithoutReplacement(size1 * size2, bombCount);
+        for (int i = 0; i < size1; i++) {
+            for (int j = 0; j < size2; j++) {
+                cells[i][j] = new Cell();
+            }
+        }
+        List<Integer> idxWhereMine = sampleWithoutReplacement(bombCount, size1 * size2);
         putBombs(cells, idxWhereMine);
         putNums(cells);
 
@@ -56,7 +61,7 @@ public class Minefield {
             throw new IllegalArgumentException("k cannot be greater than m");
         }
         Random random = new Random();
-        List<Integer> numbers = new ArrayList<>();
+        List<Integer> numbers = new ArrayList<Integer>();
         for (int i = 0; i < m; i++) {
             numbers.add(i);
         }

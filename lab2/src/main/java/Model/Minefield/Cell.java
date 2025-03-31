@@ -40,6 +40,10 @@ public class Cell {
         this.mineHere = mineHere;
     }
 
+
+    public Cell() {
+    }
+
     Cell(boolean ismineHere, int num) {
         setMineHere(ismineHere);
         setNum(num);
