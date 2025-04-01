@@ -12,31 +12,20 @@ import java.awt.event.ActionListener;
 
 public class VisualMinefield extends JPanel {
 
-    private Integer size1;
-    private Integer size2;
+
     private MineButton[][] mineButtons;
-    ActionListener greedLiistener;
-
-    public Integer getSize1() {
-        return size1;
-    }
-
-    public Integer getSize2() {
-        return size2;
-    }
-
+    ActionListener greedListener;
 
     public VisualMinefield(Minefield minefield) {
-        greedLiistener = new ActionListener() {
+        greedListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 MineButton mineButton = (MineButton) e.getSource();
             }
         };
 
-
-        size1 = minefield.getSize1();
-        size2 = minefield.getSize2();
+        int size1 = minefield.getSize1();
+        int size2 = minefield.getSize2();
         setLayout(new GridBagLayout());
         setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         GridBagConstraints gbc = new GridBagConstraints();
@@ -56,6 +45,7 @@ public class VisualMinefield extends JPanel {
 
     }
 
+
     public MineButton getMineButton(Integer x, Integer y) {
         return mineButtons[x][y];
 
@@ -65,22 +55,22 @@ public class VisualMinefield extends JPanel {
     public void update(Model model) {
 
         showAllField(model.getMinefield());
-        
+
     }
 
 
     private void showAllField(Minefield minefield) {
+        int size1 = minefield.getSize1();
+        int size2 = minefield.getSize2();
         for (int i = 0; i < size1; i++) {
             for (int j = 0; j < size2; j++) {
 
-                if (minefield.getCell(i, j).isStateChanged()) {
-                    mineButtons[i][j].update(minefield.getCell(i, j));
-                    minefield.getCell(i, j).setStateChanged(false);
-
-                }
+                mineButtons[i][j].update(minefield.getCell(i, j));
 
             }
+
         }
+
 
     }
 };

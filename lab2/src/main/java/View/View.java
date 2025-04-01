@@ -43,13 +43,13 @@ public class View {
     }
 
     public void start() {
-        showMainWindow(controller.getModel().getMinefield());
+        showMainWindow();
 
     }
 
-    public void showMainWindow(Minefield minefield) {
+    public void showMainWindow() {
         if (mainWindow == null) {
-            mainWindow = new MainWindow(minefield);
+            mainWindow = new MainWindow(controller.getModel().getMinefield());
         }
         mainWindow.setVisible(true);
     }
@@ -74,9 +74,9 @@ public class View {
         leaderboardWindow.setVisible(true);
     }
 
-    public void showAll(Minefield minefield) {
+    public void showAll() {
         showAboutWindow();
-        showMainWindow(minefield);
+        showMainWindow();
         showLeaderboardWindow();
     }
 
@@ -152,8 +152,10 @@ public class View {
 
 
     public void setFieldListeners(VisualMinefield visualMinefield) {
-        for (int i = 0; i < visualMinefield.getSize1(); i++) {
-            for (int j = 0; j < visualMinefield.getSize2(); j++) {
+        int size1 = controller.getModel().getMinefield().getSize1();
+        int size2 = controller.getModel().getMinefield().getSize2();
+        for (int i = 0; i < size1; i++) {
+            for (int j = 0; j < size2; j++) {
                 JButton button = visualMinefield.getMineButton(i, j);
                 int finalI = i;
                 int finalJ = j;
@@ -168,7 +170,6 @@ public class View {
                             controller.changeFlagState(finalI, finalJ);
                             mainWindow.update(controller.getModel());
                         }
-
                     }
                 });
 

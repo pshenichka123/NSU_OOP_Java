@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Random;
 
 public class Minefield {
-    private Integer size1 = 9;
-    private Integer size2 = 9;
+    private Integer size1;
+    private Integer size2;
 
     public Integer getBombCount() {
         return bombCount;
@@ -121,12 +121,12 @@ public class Minefield {
     public boolean act(int i, int j) {
 
         Cell cell = cells[i][j];
+        if (cell.isFlagsSet()) {
+            return false;
+        }
         if (cell.isMineHere()) {
             cell.setOpened(true);
             return true;
-        }
-        if (cell.isFlagsSet()) {
-            return false;
         }
         cell.setOpened(true);
         //chek opened nearby

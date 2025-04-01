@@ -25,6 +25,11 @@ public class GamePanel extends JPanel {
         return visualMinefield;
     }
 
+    public void newMineField(Minefield minefield) {
+        visualMinefield.removeAll();
+        visualMinefield = new VisualMinefield(minefield);
+        add(visualMinefield);
+    }
 
     public void update(Model model) {
 

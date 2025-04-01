@@ -5,6 +5,7 @@ import Model.Minefield.Minefield;
 public class Model {
     private boolean isGameEnded = false;
     private Minefield minefield;
+    private boolean win = false;
 
     public boolean isWin() {
         return win;
@@ -14,7 +15,6 @@ public class Model {
         this.win = win;
     }
 
-    private boolean win = false;
 
     public Minefield getMinefield() {
         return minefield;
@@ -23,7 +23,6 @@ public class Model {
     public void recreateMinefield(Integer[] size, Integer bombs) {
         minefield = new Minefield(size, bombs);
     }
-
 
     public boolean isGameEnded() {
         return isGameEnded;

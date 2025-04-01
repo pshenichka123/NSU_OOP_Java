@@ -38,15 +38,13 @@ public class NewGameWindow extends JFrame {
                     int num1 = Integer.parseInt(field1.getText());
                     int num2 = Integer.parseInt(field2.getText());
                     int mines = Integer.parseInt((field3.getText()));
-                    frame.dispose();
+
                     controller.recreateModel(num1, num2, mines);
-                    MainWindow newmainWindow = new MainWindow(controller.getModel().getMinefield());
-                    view.closeMainWindow();
-                    view.setMainWindow(newmainWindow);
-                    view.showMainWindow(controller.getModel().getMinefield());
-                    view.closeNewGameWindow();
-                    view.setListeners();
-                    view.setFieldListeners(view.getVisualMinefield());
+                    view.getMainWindow().getGamePanel().newMineField(controller.getModel().getMinefield());
+                    view.getMainWindow().revalidate();
+                    view.getMainWindow().repaint();
+                    view.getMainWindow().update(controller.getModel());
+                    frame.dispose();
                     System.out.println("Введенные числа: " + num1 + ", " + num2);
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(frame, "Ошибка: введите числа!");

@@ -12,6 +12,15 @@ public class MainWindow extends JFrame {
     MenuPanel menuPanel;
     GamePanel gamePanel;
 
+    public GamePanel getGamePanel() {
+        return gamePanel;
+    }
+
+    public void setGamePanel(GamePanel gamePanel) {
+        this.gamePanel = gamePanel;
+    }
+
+
     public MainWindow(Minefield minefield) {
 
         new JFrame("Мин Нет");
@@ -26,6 +35,7 @@ public class MainWindow extends JFrame {
         pack();
         setResizable(false);
     }
+
 
     public void update(Model model) {
         gamePanel.update(model);
