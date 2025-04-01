@@ -1,6 +1,5 @@
 package Model.Minefield;
 
-import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -43,13 +42,15 @@ public class Minefield {
     }
 
     public Minefield(Integer[] size, Integer bombCount) {
-        cells = new Cell[size1][size2];
-        for (int i = 0; i < size1; i++) {
-            for (int j = 0; j < size2; j++) {
+        setSize1(size[0]);
+        setSize2(size[1]);
+        cells = new Cell[size[0]][size[1]];
+        for (int i = 0; i < size[0]; i++) {
+            for (int j = 0; j < size[1]; j++) {
                 cells[i][j] = new Cell();
             }
         }
-        List<Integer> idxWhereMine = sampleWithoutReplacement(bombCount, size1 * size2);
+        List<Integer> idxWhereMine = sampleWithoutReplacement(bombCount, size[0] * size[1]);
         putBombs(cells, idxWhereMine);
         putNums(cells);
 
@@ -117,4 +118,59 @@ public class Minefield {
         }
     }
 
+    public boolean act(int i, int j) {
+
+        Cell cell = cells[i][j];
+        if (cell.isMineHere()) {
+            cell.setOpened(true);
+            return true;
+        }
+        if (cell.isFlagsSet()) {
+            return false;
+        }
+        cell.setOpened(true);
+        //chek opened nearby
+        if (cell.getNum() == 0) {
+            for (int di = -1; di <= 1; di++) {
+                for (int dj = -1; dj <= 1; dj++) {
+                    // Пропускаем текущую клетку
+                    if (di == 0 && dj == 0) {
+                        continue;
+                    }
+
+                    int ni = i + di; // Новый индекс строки
+                    int nj = j + dj; // Новый индекс столбца
+
+                    // Проверяем, не вышли ли за границы массива
+                    if (ni >= 0 && ni < size1 && nj >= 0 && nj < size2) {
+                        if (cells[ni][nj].getNum() == 0) {
+                            if (!cells[ni][nj].isOpened()) {
+                                act(ni, nj);
+                            }
+                        }
+                        cells[ni][nj].setOpened(true);
+
+                    }
+                }
+
+            }
+
+        }
+        return false;
+    }
+
+    public void changeFlagState(int i, int j) {
+        Cell cell = cells[i][j];
+
+        cell.setFlagsSet(!cell.isFlagsSet());
+    }
+
+    public void setVisible() {
+        for (int i = 0; i < size1; i++) {
+            for (int j = 0; j < size2; j++) {
+                cells[i][j].setOpened(true);
+
+            }
+        }
+    }
 }

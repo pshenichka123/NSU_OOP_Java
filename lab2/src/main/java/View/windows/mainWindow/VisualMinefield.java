@@ -2,6 +2,8 @@ package View.windows.mainWindow;
 
 import Model.Minefield.Cell;
 import Model.Minefield.Minefield;
+import Model.Model;
+import View.windows.mainWindow.MineButton.MineButton;
 
 import javax.swing.*;
 import java.awt.*;
@@ -60,14 +62,25 @@ public class VisualMinefield extends JPanel {
     }
 
 
-    public void update(Minefield minefield) {
+    public void update(Model model) {
+
+        showAllField(model.getMinefield());
+        
+    }
+
+
+    private void showAllField(Minefield minefield) {
         for (int i = 0; i < size1; i++) {
             for (int j = 0; j < size2; j++) {
 
+                if (minefield.getCell(i, j).isStateChanged()) {
+                    mineButtons[i][j].update(minefield.getCell(i, j));
+                    minefield.getCell(i, j).setStateChanged(false);
+
+                }
 
             }
         }
-
 
     }
 };

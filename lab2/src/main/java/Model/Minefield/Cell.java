@@ -4,7 +4,18 @@ public class Cell {
     private boolean opened = false;
     private boolean mineHere = false;
     private int num;
+    private boolean isFlagsSet = false;
+    private boolean stateChanged = false;
 
+
+    public boolean isStateChanged() {
+        return stateChanged;
+    }
+
+    public void setStateChanged(boolean stateChanged) {
+        this.stateChanged = stateChanged;
+    }
+    
     public int getNum() {
         return num;
     }
@@ -20,9 +31,9 @@ public class Cell {
 
     public void setFlagsSet(boolean flagsSet) {
         isFlagsSet = flagsSet;
+        setStateChanged(true);
     }
 
-    private boolean isFlagsSet = false;
 
     public boolean isOpened() {
         return opened;
@@ -30,6 +41,7 @@ public class Cell {
 
     public void setOpened(boolean opened) {
         this.opened = opened;
+        setStateChanged(true);
     }
 
     public boolean isMineHere() {
@@ -47,6 +59,7 @@ public class Cell {
     Cell(boolean ismineHere, int num) {
         setMineHere(ismineHere);
         setNum(num);
+        setStateChanged(true);
     }
 
 

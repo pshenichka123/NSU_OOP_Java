@@ -1,6 +1,7 @@
 package View.windows.mainWindow;
 
 import Model.Minefield.Minefield;
+import Model.Model;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,8 +27,8 @@ public class MainWindow extends JFrame {
         setResizable(false);
     }
 
-    public void update(Minefield minefield) {
-        gamePanel.update(minefield);
+    public void update(Model model) {
+        gamePanel.update(model);
     }
 
     public VisualMinefield getVisualMinefield() {

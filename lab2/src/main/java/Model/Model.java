@@ -1,13 +1,20 @@
 package Model;
 
-import Model.Minefield.Cell;
 import Model.Minefield.Minefield;
 
 public class Model {
-    private boolean isModelAndViewAreSync = false;
-    private boolean isGameRunning = true;
+    private boolean isGameEnded = false;
     private Minefield minefield;
 
+    public boolean isWin() {
+        return win;
+    }
+
+    public void setWin(boolean win) {
+        this.win = win;
+    }
+
+    private boolean win = false;
 
     public Minefield getMinefield() {
         return minefield;
@@ -18,20 +25,12 @@ public class Model {
     }
 
 
-    public boolean isModelAndViewAreSync() {
-        return isModelAndViewAreSync;
+    public boolean isGameEnded() {
+        return isGameEnded;
     }
 
-    public void setModelAndViewAreSync(boolean modelAndViewAreSync) {
-        isModelAndViewAreSync = modelAndViewAreSync;
-    }
-
-    public boolean isGameRunning() {
-        return isGameRunning;
-    }
-
-    public void setGameRunning(boolean gameRunning) {
-        isGameRunning = gameRunning;
+    public void setGameEnded(boolean gameEnded) {
+        isGameEnded = gameEnded;
     }
 
 
@@ -39,32 +38,24 @@ public class Model {
         minefield = new Minefield(new Integer[]{9, 9}, 10);
     }
 
-    public void update(Integer[] coords) {
-        Cell cell = minefield.getCell(coords[0], coords[1]);
-        if (cell.isFlagsSet()) {
-            return;
-        }
-        if (cell.isMineHere()) {
-            cell.setOpened(true);
-            setModelAndViewAreSync(false);
-            setGameRunning(false);
-            return;
-        }
-        cell.setOpened(true);
-        setModelAndViewAreSync(false);
-        return;
+    public Model(Integer[] sizes, int bombs) {
+        minefield = new Minefield(sizes, bombs);
+
     }
 
-
     public void act(int i, int j) {
-
-        Cell cell = minefield.getCell(i, j);
-        if (cell.isMineHere()) {
-            setGameRunning(false);
+        setGameEnded(minefield.act(i, j));
+        if (isGameEnded()) {
+            setWin(false);
         }
-        cell.setOpened(true);
-        //chek opened nearby
+        if (isGameEnded() && !isWin()) {
 
+            minefield.setVisible();
+        }
 
+    }
+
+    public void changeFlagState(int j, int i) {
+        minefield.changeFlagState(i, j);
     }
 }

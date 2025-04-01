@@ -10,33 +10,40 @@ import View.windows.mainWindow.VisualMinefield;
 import controller.Controller;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
 public class View {
 
 
-    Model model;
     Controller controller;
 
 
     AboutWindow aboutWindow;
     NewGameWindow newGameWindow;
+
+    public MainWindow getMainWindow() {
+        return mainWindow;
+    }
+
+    public void setMainWindow(MainWindow mainWindow) {
+        this.mainWindow = mainWindow;
+    }
+
     MainWindow mainWindow;
     LeaderboardWindow leaderboardWindow;
 
 
     public View() {
 
-        model = new Model();
-        mainWindow = new MainWindow(model.getMinefield());
-        controller = new Controller(model);
+
+        controller = new Controller();
+        mainWindow = new MainWindow(controller.getModel().getMinefield());
         setListeners();
         setFieldListeners(getVisualMinefield());
     }
 
     public void start() {
-        showMainWindow(model.getMinefield());
+        showMainWindow(controller.getModel().getMinefield());
 
     }
 
@@ -54,11 +61,10 @@ public class View {
         aboutWindow.setVisible(true);
     }
 
-    public void showNewGameWindow() {
+    private void showNewGameWindow() {
         if (newGameWindow == null) {
-            newGameWindow = new NewGameWindow();
+            newGameWindow = new NewGameWindow(controller, this);
         }
-        newGameWindow.setVisible(true);
     }
 
     public void showLeaderboardWindow() {
@@ -71,7 +77,6 @@ public class View {
     public void showAll(Minefield minefield) {
         showAboutWindow();
         showMainWindow(minefield);
-        showNewGameWindow();
         showLeaderboardWindow();
     }
 
@@ -115,17 +120,19 @@ public class View {
     }
 
 
-    private void setListeners() {
+    public void setListeners() {
 
         getNewGameButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                showNewGameWindow();
+
             }
         });
         getExitButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                model.setGameRunning(false);
+                controller.getModel().setGameEnded(false);
                 closeAll();
             }
         });
@@ -143,18 +150,25 @@ public class View {
         });
     }
 
-    private void setFieldListeners(VisualMinefield visualMinefield) {
+
+    public void setFieldListeners(VisualMinefield visualMinefield) {
         for (int i = 0; i < visualMinefield.getSize1(); i++) {
             for (int j = 0; j < visualMinefield.getSize2(); j++) {
                 JButton button = visualMinefield.getMineButton(i, j);
                 int finalI = i;
                 int finalJ = j;
-                button.addActionListener(new ActionListener() {
+                button.addMouseListener(new MouseAdapter() {
                     @Override
-                    public void actionPerformed(ActionEvent e) {
+                    public void mouseClicked(MouseEvent e) {
+                        if (SwingUtilities.isLeftMouseButton(e)) {
+                            controller.revealCell(finalI, finalJ);
+                            mainWindow.update(controller.getModel());
+                        }
+                        if (SwingUtilities.isRightMouseButton(e)) {
+                            controller.changeFlagState(finalI, finalJ);
+                            mainWindow.update(controller.getModel());
+                        }
 
-                        controller.buttonPressed(finalI, finalJ);
-                        mainWindow = new MainWindow(model.getMinefield());
                     }
                 });
 
