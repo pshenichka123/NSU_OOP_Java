@@ -8,6 +8,27 @@ import java.util.Random;
 public class Minefield {
     private Integer size1;
     private Integer size2;
+    private Integer bombCount;
+    private Cell[][] cells;
+    private Integer unopenedCellsCount;
+    private Integer FlagCellsCount;
+
+    public Integer getUnopenedCellsCount() {
+        return unopenedCellsCount;
+    }
+
+    public void setUnopenedCellsCount(Integer unopenedCellsCount) {
+        this.unopenedCellsCount = unopenedCellsCount;
+    }
+
+    public Integer getFlagCellsCount() {
+        return FlagCellsCount;
+    }
+
+    public void setFlagCellsCount(Integer flagCellsCount) {
+        FlagCellsCount = flagCellsCount;
+    }
+
 
     public Integer getBombCount() {
         return bombCount;
@@ -17,8 +38,6 @@ public class Minefield {
         this.bombCount = bombCount;
     }
 
-    private Integer bombCount = 10;
-    private Cell[][] cells;
 
     public Integer getSize1() {
         return size1;
@@ -44,20 +63,28 @@ public class Minefield {
     public Minefield(Integer[] size, Integer bombCount) {
         setSize1(size[0]);
         setSize2(size[1]);
+        setBombCount(bombCount);
+        setFlagCellsCount(0);
+        setUnopenedCellsCount(size1 * size2 - bombCount);
         cells = new Cell[size[0]][size[1]];
         for (int i = 0; i < size[0]; i++) {
             for (int j = 0; j < size[1]; j++) {
                 cells[i][j] = new Cell();
             }
         }
-        List<Integer> idxWhereMine = sampleWithoutReplacement(bombCount, size[0] * size[1]);
-        putBombs(cells, idxWhereMine);
-        putNums(cells);
+
 
     }
 
 
-    public static List<Integer> sampleWithoutReplacement(int k, int m) {
+    public void addSafeMinesOnfield(Integer[] coords) {
+
+        List<Integer> idxWhereMine = sampleWithoutReplacement(bombCount, size1 * size2, coords[0] * size1 + coords[1]);
+        putBombs(cells, idxWhereMine);
+        putNums(cells);
+    }
+
+    public static List<Integer> sampleWithoutReplacement(int k, int m, int guaranteeToBeeFree) {
         if (k > m) {
             throw new IllegalArgumentException("k cannot be greater than m");
         }
@@ -66,8 +93,9 @@ public class Minefield {
         for (int i = 0; i < m; i++) {
             numbers.add(i);
         }
+        numbers.remove((Object) guaranteeToBeeFree);
         for (int i = 0; i < k; i++) {
-            int j = i + random.nextInt(m - i); // Случайный индекс от i до m-1
+            int j = i + random.nextInt(m - i - 1); // Случайный индекс от i до m-1
             Collections.swap(numbers, i, j);   // Меняем местами
         }
         return numbers.subList(0, k);
@@ -76,7 +104,7 @@ public class Minefield {
 
     private void putBombs(Cell[][] Cells, List<Integer> mineIdx) {
         for (int idx : mineIdx) {
-            int coords[] = {idx % size1, idx / size2};
+            int coords[] = {idx % size1, idx / size1};
             cells[coords[0]][coords[1]].setMineHere(true);
 
         }
@@ -118,18 +146,16 @@ public class Minefield {
         }
     }
 
-    public boolean act(int i, int j) {
+    public void act(int i, int j) {
 
         Cell cell = cells[i][j];
-        if (cell.isFlagsSet()) {
-            return false;
-        }
         if (cell.isMineHere()) {
             cell.setOpened(true);
-            return true;
+            return;
         }
         cell.setOpened(true);
-        //chek opened nearby
+        unopenedCellsCount--;
+        //check opened nearby
         if (cell.getNum() == 0) {
             for (int di = -1; di <= 1; di++) {
                 for (int dj = -1; dj <= 1; dj++) {
@@ -143,10 +169,8 @@ public class Minefield {
 
                     // Проверяем, не вышли ли за границы массива
                     if (ni >= 0 && ni < size1 && nj >= 0 && nj < size2) {
-                        if (cells[ni][nj].getNum() == 0) {
-                            if (!cells[ni][nj].isOpened()) {
-                                act(ni, nj);
-                            }
+                        if (!cells[ni][nj].isOpened()) {
+                            act(ni, nj);
                         }
                         cells[ni][nj].setOpened(true);
 
@@ -156,13 +180,17 @@ public class Minefield {
             }
 
         }
-        return false;
     }
 
     public void changeFlagState(int i, int j) {
         Cell cell = cells[i][j];
 
         cell.setFlagsSet(!cell.isFlagsSet());
+        if (cell.isFlagsSet()) {
+            FlagCellsCount++;
+        } else {
+            FlagCellsCount--;
+        }
     }
 
     public void setVisible() {

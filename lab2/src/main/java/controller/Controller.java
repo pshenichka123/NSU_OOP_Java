@@ -16,9 +16,7 @@ public class Controller {
 
 
     public void revealCell(int i, int j) {
-
         model.act(i, j);
-
     }
 
     public void changeFlagState(int i, int j) {

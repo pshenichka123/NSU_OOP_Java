@@ -17,8 +17,6 @@ public class TimerPanel extends JPanel {
 
         // Создаем таймер с интервалом 1000 мс (1 секунда)
         timer = new Timer(1000, new ActionListener() {
-            private int seconds = 0;
-
             @Override
             public void actionPerformed(ActionEvent e) {
                 seconds++;
@@ -27,7 +25,7 @@ public class TimerPanel extends JPanel {
         });
 
         // Запускаем таймер
-
+        start();
 
     }
 
@@ -44,4 +42,7 @@ public class TimerPanel extends JPanel {
     }
 
 
+    public void stopTimer() {
+        timer.stop();
+    }
 }

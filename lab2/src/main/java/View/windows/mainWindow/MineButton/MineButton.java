@@ -4,16 +4,16 @@ import Model.Minefield.Cell;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.net.URL;
 
 public class MineButton extends JButton {
     int buttonSize = 60;
 
     public MineButton(Cell cell) {
-        System.out.println(MineButton.class);
 
         URL imageUrl = chooseURL(cell);
-
+        setVisible(true);
         assert imageUrl != null;
         ImageIcon icon = new ImageIcon(imageUrl);
         new JButton(icon);
@@ -34,8 +34,16 @@ public class MineButton extends JButton {
         Image image = icon.getImage();
         Image scaled = image.getScaledInstance(buttonSize, buttonSize, Image.SCALE_FAST);
         ImageIcon scaledIcon = new ImageIcon((scaled));
+        if (cell.isOpened()) {
+            setEnabled(false);
+            setDisabledSelectedIcon(scaledIcon);
+            setDisabledIcon(scaledIcon);
+            for (ActionListener al : this.getActionListeners()) {
+                this.removeActionListener(al);
+            }
+        }
         setIcon(scaledIcon);
-
+        setVisible(true);
     }
 
     private URL chooseURL(Cell cell) {

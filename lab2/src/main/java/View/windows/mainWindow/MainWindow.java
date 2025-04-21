@@ -16,8 +16,18 @@ public class MainWindow extends JFrame {
         return gamePanel;
     }
 
+    public void stopTimer() {
+        gamePanel.stopTimer();
+    }
+
     public void setGamePanel(GamePanel gamePanel) {
+
         this.gamePanel = gamePanel;
+        setLocationRelativeTo(null);
+        setResizable(true);
+        revalidate();
+        repaint();
+        pack();
     }
 
 
@@ -30,15 +40,18 @@ public class MainWindow extends JFrame {
         gamePanel = new GamePanel(minefield);
         add(menuPanel, BorderLayout.NORTH);
         add(gamePanel, BorderLayout.CENTER);
-        setSize(600, 500);
         setLocationRelativeTo(null);
+        setResizable(true);
+        revalidate();
+        repaint();
         pack();
-        setResizable(false);
+
     }
 
 
     public void update(Model model) {
         gamePanel.update(model);
+
     }
 
     public VisualMinefield getVisualMinefield() {
@@ -60,4 +73,6 @@ public class MainWindow extends JFrame {
     public JButton getHighScoresButton() {
         return menuPanel.getHighScoresButton();
     }
+
+
 }

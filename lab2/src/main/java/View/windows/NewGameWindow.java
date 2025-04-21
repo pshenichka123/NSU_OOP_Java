@@ -11,62 +11,57 @@ import java.awt.event.ActionListener;
 
 public class NewGameWindow extends JFrame {
 
+
+    // Первое поле с подписью
+    JLabel label1 = new JLabel("По горизонтали:");
+    JTextField field1 = new JTextField();
+
+    // Второе поле с подписью
+    JLabel label2 = new JLabel("По вертикали:");
+    JTextField field2 = new JTextField();
+    JLabel label3 = new JLabel("Количество мин:");
+    JTextField field3 = new JTextField();
+    // Кнопка подтверждения
+    JButton confirmButton = new JButton("Подтвердить");
+
     public NewGameWindow(Controller controller, View view) {
+        new JFrame("Ввод чисел");
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setSize(350, 300);
+        setLayout(new GridLayout(4, 2, 10, 10)); // 3 строки, 2 колонки, отступы 10px
 
-
-        JFrame frame = new JFrame("Ввод чисел");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(350, 300);
-        frame.setLayout(new GridLayout(4, 2, 10, 10)); // 3 строки, 2 колонки, отступы 10px
-
-        // Первое поле с подписью
-        JLabel label1 = new JLabel("По горизонтали:");
-        JTextField field1 = new JTextField();
-
-        // Второе поле с подписью
-        JLabel label2 = new JLabel("По вертикали:");
-        JTextField field2 = new JTextField();
-        JLabel label3 = new JLabel("Количество мин:");
-        JTextField field3 = new JTextField();
-        // Кнопка подтверждения
-        JButton confirmButton = new JButton("Подтвердить");
+        add(label1);
+        add(field1);
+        add(label2);
+        add(field2);
+        add(label3);
+        add(field3);
+        add(new JLabel()); // Пустая ячейка для выравнивания
+        add(confirmButton);
+        // Центрируем окно и делаем его видимым
+        setLocationRelativeTo(null);
+        setVisible(true);
         confirmButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Проверка ввода (опционально)
-                try {
-                    int num1 = Integer.parseInt(field1.getText());
-                    int num2 = Integer.parseInt(field2.getText());
-                    int mines = Integer.parseInt((field3.getText()));
 
-                    controller.recreateModel(num1, num2, mines);
-                    view.getMainWindow().getGamePanel().newMineField(controller.getModel().getMinefield());
-                    view.getMainWindow().revalidate();
-                    view.getMainWindow().repaint();
-                    view.getMainWindow().update(controller.getModel());
-                    frame.dispose();
-                    System.out.println("Введенные числа: " + num1 + ", " + num2);
-                } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(frame, "Ошибка: введите числа!");
-                    return;
-                }
+                int num1 = Integer.parseInt(field1.getText());
+                int num2 = Integer.parseInt(field2.getText());
+                int mines = Integer.parseInt((field3.getText()));
+                controller.recreateModel(num1, num2, mines);
+                view.getMainWindow().getGamePanel().newMineField(controller.getModel().getMinefield());
+                view.setListeners();
+                view.setFieldListeners(view.getVisualMinefield());
+                view.getMainWindow().update(controller.getModel());
+                view.getMainWindow().pack();
 
+                dispose();
 
             }
         });
 
         // Добавляем компоненты на форму
-        frame.add(label1);
-        frame.add(field1);
-        frame.add(label2);
-        frame.add(field2);
-        frame.add(label3);
-        frame.add(field3);
-        frame.add(new JLabel()); // Пустая ячейка для выравнивания
-        frame.add(confirmButton);
-        // Центрируем окно и делаем его видимым
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
+
     }
 
 

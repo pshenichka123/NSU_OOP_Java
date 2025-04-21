@@ -1,9 +1,8 @@
 package View;
 
-import Model.Minefield.Minefield;
-import Model.Model;
 import View.windows.AboutWindow;
-import View.windows.LeaderboardWindow;
+import View.windows.EndgameWindow;
+import View.windows.Leaderboard.LeaderboardWindow;
 import View.windows.NewGameWindow;
 import View.windows.mainWindow.MainWindow;
 import View.windows.mainWindow.VisualMinefield;
@@ -16,7 +15,7 @@ public class View {
 
 
     Controller controller;
-
+    LeaderboardWindow leaderboard;
 
     AboutWindow aboutWindow;
     NewGameWindow newGameWindow;
@@ -38,6 +37,7 @@ public class View {
 
         controller = new Controller();
         mainWindow = new MainWindow(controller.getModel().getMinefield());
+        leaderboard = new LeaderboardWindow();
         setListeners();
         setFieldListeners(getVisualMinefield());
     }
@@ -65,6 +65,7 @@ public class View {
         if (newGameWindow == null) {
             newGameWindow = new NewGameWindow(controller, this);
         }
+        newGameWindow.setVisible(true);
     }
 
     public void showLeaderboardWindow() {
@@ -132,7 +133,6 @@ public class View {
         getExitButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                controller.getModel().setGameEnded(false);
                 closeAll();
             }
         });
@@ -145,6 +145,7 @@ public class View {
         getHighScoresButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                showLeaderboardWindow();
 
             }
         });
@@ -159,25 +160,48 @@ public class View {
                 JButton button = visualMinefield.getMineButton(i, j);
                 int finalI = i;
                 int finalJ = j;
+
                 button.addMouseListener(new MouseAdapter() {
+
+
                     @Override
-                    public void mouseClicked(MouseEvent e) {
+                    public void mouseReleased(MouseEvent e) {
+                        if (!controller.getModel().isIsgamestarted()) {
+                            controller.getModel().getMinefield().addSafeMinesOnfield(new Integer[]{finalI, finalJ});
+                            controller.getModel().setIsgamestarted(true);
+                        }
+
                         if (SwingUtilities.isLeftMouseButton(e)) {
+                            if (controller.getModel().getMinefield().getCell(finalI, finalJ).isFlagsSet()) {
+                                return;
+                            }
                             controller.revealCell(finalI, finalJ);
                             mainWindow.update(controller.getModel());
+
+
                         }
                         if (SwingUtilities.isRightMouseButton(e)) {
                             controller.changeFlagState(finalI, finalJ);
                             mainWindow.update(controller.getModel());
                         }
+                        if (controller.getModel().isIsgamerwon()) {
+                            showEndGameWindow(controller, mainWindow.getGamePanel().getTime());
+                            mainWindow.stopTimer();
+                        }
+                        if (controller.getModel().isIsgamerlost()) {
+                            mainWindow.stopTimer();
+                        }
                     }
                 });
-
 
             }
         }
 
 
+    }
+
+    private void showEndGameWindow(Controller controller, int time) {
+        EndgameWindow endgameWindow = new EndgameWindow(controller, time, leaderboard);
     }
 
 

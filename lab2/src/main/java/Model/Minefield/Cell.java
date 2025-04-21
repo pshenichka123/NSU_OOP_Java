@@ -31,6 +31,7 @@ public class Cell {
 
     public void setOpened(boolean opened) {
         this.opened = opened;
+        setFlagsSet(false);
     }
 
     public boolean isMineHere() {

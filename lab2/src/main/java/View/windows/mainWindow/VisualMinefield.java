@@ -27,9 +27,10 @@ public class VisualMinefield extends JPanel {
         int size1 = minefield.getSize1();
         int size2 = minefield.getSize2();
         setLayout(new GridBagLayout());
-        setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        setBorder(BorderFactory.createEmptyBorder(size1, size2, 10, 10));
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.fill = GridBagConstraints.NONE;
+
+
         gbc.anchor = GridBagConstraints.CENTER;
         mineButtons = new MineButton[size1][size2];
         for (int i = 0; i < size1; i++) {
@@ -41,7 +42,8 @@ public class VisualMinefield extends JPanel {
                 add(mineButtons[i][j], gbc);
             }
         }
-
+        revalidate();
+        repaint();
 
     }
 
@@ -55,6 +57,8 @@ public class VisualMinefield extends JPanel {
     public void update(Model model) {
 
         showAllField(model.getMinefield());
+        revalidate();
+        repaint();
 
     }
 

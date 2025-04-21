@@ -8,57 +8,27 @@ import java.util.Collections;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
-public class Leaderboard extends JFrame {
+public class LeaderboardWindow extends JFrame {
     private final String FILE_NAME = "leaderboard.txt";
 
     private JTable table;
     private DefaultTableModel tableModel;
 
 
-    private void createAndShowGUI() {
-        new JFrame("Таблица рекордов");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    public LeaderboardWindow() {
+        super("Таблица рекордов"); // Используем super вместо создания нового JFrame
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(400, 300);
         setLayout(new BorderLayout());
+        setLocationRelativeTo(null);
 
-        // Панель для ввода данных
-        JPanel inputPanel = new JPanel(new GridLayout(2, 2));
-        JLabel nameLabel = new JLabel("Ник игрока:");
-        JTextField nameField = new JTextField();
-        JLabel timeLabel = new JLabel("Время (сек):");
-        JTextField timeField = new JTextField();
-
-        inputPanel.add(nameLabel);
-        inputPanel.add(nameField);
-        inputPanel.add(timeLabel);
-        inputPanel.add(timeField);
-
-        // Кнопка добавления
-        JButton addButton = new JButton("Добавить результат");
-        addButton.addActionListener(e -> {
-            try {
-                String nickname = nameField.getText();
-                int time = Integer.parseInt(timeField.getText());
-                addRecord(nickname, time);
-                nameField.setText("");
-                timeField.setText("");
-                loadLeaderboard();
-            } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(this, "Пожалуйста, введите корректное время!", "Ошибка", JOptionPane.ERROR_MESSAGE);
-            }
-        });
-
-        // Таблица рекордов
+        // Создаем модель таблицы с заголовками колонок
         tableModel = new DefaultTableModel(new Object[]{"Место", "Ник", "Время (сек)"}, 0);
         table = new JTable(tableModel);
+        loadLeaderboard();
         JScrollPane scrollPane = new JScrollPane(table);
+        add(scrollPane, BorderLayout.CENTER);
 
-        // Добавляем компоненты на форму
-        add(inputPanel, BorderLayout.NORTH);
-        add(addButton, BorderLayout.CENTER);
-        add(scrollPane, BorderLayout.SOUTH);
-
-        setVisible(true);
     }
 
     public void addRecord(String nickname, int time) {
@@ -100,8 +70,6 @@ public class Leaderboard extends JFrame {
 
     private void loadLeaderboard() {
         List<PlayerRecord> records = readRecords();
-        tableModel.setRowCount(0); // Очищаем таблицу
-
         int place = 1;
         for (PlayerRecord record : records) {
             tableModel.addRow(new Object[]{place++, record.nickname, record.time});

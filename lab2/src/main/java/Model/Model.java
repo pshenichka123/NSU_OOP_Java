@@ -2,56 +2,71 @@ package Model;
 
 import Model.Minefield.Minefield;
 
+import java.util.Objects;
+
 public class Model {
-    private boolean isGameEnded = false;
     private Minefield minefield;
-    private boolean win = false;
 
-    public boolean isWin() {
-        return win;
+    private boolean isgamerwon = false;
+    private boolean isgamerlost = false;
+    private boolean isgamestarted = false;
+
+    public boolean isIsgamestarted() {
+        return isgamestarted;
     }
 
-    public void setWin(boolean win) {
-        this.win = win;
+    public void setIsgamestarted(boolean isgamestarted) {
+        this.isgamestarted = isgamestarted;
     }
 
+    public boolean isIsgamerwon() {
+        return isgamerwon;
+    }
+
+    public void setIsgamerwon(boolean isgamerwon) {
+        this.isgamerwon = isgamerwon;
+    }
+
+    public boolean isIsgamerlost() {
+        return isgamerlost;
+    }
+
+    public void setIsgamerlost(boolean isgamerlost) {
+        this.isgamerlost = isgamerlost;
+    }
 
     public Minefield getMinefield() {
         return minefield;
     }
 
-    public void recreateMinefield(Integer[] size, Integer bombs) {
-        minefield = new Minefield(size, bombs);
-    }
-
-    public boolean isGameEnded() {
-        return isGameEnded;
-    }
-
-    public void setGameEnded(boolean gameEnded) {
-        isGameEnded = gameEnded;
-    }
-
 
     public Model() {
-        minefield = new Minefield(new Integer[]{9, 9}, 10);
+        minefield = new Minefield(new Integer[]{12, 12}, 10);
     }
 
     public Model(Integer[] sizes, int bombs) {
         minefield = new Minefield(sizes, bombs);
-
     }
 
     public void act(int i, int j) {
-        setGameEnded(minefield.act(i, j));
-        if (isGameEnded()) {
-            setWin(false);
-        }
-        if (isGameEnded() && !isWin()) {
+        minefield.act(i, j);
+        isGamerLost(i, j);
+        isGamerWon();
+    }
 
+    private void isGamerLost(int i, int j) {
+        if (minefield.getCell(i, j).isMineHere()) {
+            isgamerlost = true;
+            isgamerwon = false;
             minefield.setVisible();
         }
+    }
 
+    private void isGamerWon() {
+        if (minefield.getUnopenedCellsCount() == 0) {
+            isgamerwon = true;
+            isgamerlost = false;
+        }
     }
 
     public void changeFlagState(int j, int i) {

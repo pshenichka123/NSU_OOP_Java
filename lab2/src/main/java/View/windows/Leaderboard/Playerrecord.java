@@ -1,4 +1,4 @@
-package Model.Leaderboard;
+package View.windows.Leaderboard;
 
 class PlayerRecord implements Comparable<PlayerRecord> {
     String nickname;
