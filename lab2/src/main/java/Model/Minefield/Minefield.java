@@ -66,10 +66,17 @@ public class Minefield {
         cells = new Cell[size[0]][size[1]];
         for (int i = 0; i < size[0]; i++) {
             for (int j = 0; j < size[1]; j++) {
+<<<<<<< HEAD
                 Vector<Integer> coords = new Vector<Integer>();
                 coords.add(i);
                 coords.add(j);
                 cells[i][j] = new Cell(coords);
+=======
+                Vector<Integer> cords = new Vector<Integer>();
+                cords.add(i);
+                cords.add(j);
+                cells[i][j] = new Cell(cords);
+>>>>>>> 2116a992dcfc6a18701621d5881878642237ee33
             }
         }
 
@@ -176,7 +183,11 @@ public class Minefield {
                     if (di == 0 && dj == 0) {
                         continue;
                     }
+<<<<<<< HEAD
                     int ni = curcell.getCoords().get(0) + di; // Новый индекс строки
+=======
+                    int ni = curcell.getCoords().getFirst() + di; // Новый индекс строки
+>>>>>>> 2116a992dcfc6a18701621d5881878642237ee33
                     int nj = curcell.getCoords().get(1) + dj; // Новый индекс столбца
 
                     // Проверяем, не вышли ли за границы массива
@@ -194,7 +205,10 @@ public class Minefield {
         }
 
         cell.setOpened(true);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2116a992dcfc6a18701621d5881878642237ee33
     }
 
     public void changeFlagState(int i, int j) {

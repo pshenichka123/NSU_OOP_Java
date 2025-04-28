@@ -17,7 +17,11 @@ public class Cell {
     }
 
     public void setCoords(Vector<Integer> coords) {
+<<<<<<< HEAD
         this.coords = new Vector<Integer>(coords);
+=======
+        this.coords = coords;
+>>>>>>> 2116a992dcfc6a18701621d5881878642237ee33
     }
 
     private Vector<Integer> coords;
