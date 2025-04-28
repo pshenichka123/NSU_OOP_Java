@@ -5,23 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="62cdf26a-a6d6-4b49-9e95-9b7b62d06667" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/View/windows/EndgameWindow.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/View/windows/Leaderboard/LeaderboardWindow.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/View/windows/Leaderboard/Playerrecord.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Minefield/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Minefield/Cell.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Model/Minefield/Minefield.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Minefield/Minefield.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Model/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Model.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/View/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/View.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/View/windows/LeaderboardWindow.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/View/windows/NewGameWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/windows/NewGameWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/View/windows/mainWindow/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/windows/mainWindow/GamePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/View/windows/mainWindow/MainWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/windows/mainWindow/MainWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/View/windows/mainWindow/MineButton/MineButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/windows/mainWindow/MineButton/MineButton.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/View/windows/mainWindow/TimerPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/windows/mainWindow/TimerPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/View/windows/mainWindow/VisualMinefield.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/windows/mainWindow/VisualMinefield.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/Controller.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,24 +43,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Build lab2.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.lab2 [:org.example.Main.main()].executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/OOP/NSU_OOP_Java/lab2&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;D:/OOP/NSU_OOP_Java/lab2/untitled1/src/main/java/org/example/Main.java&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.Color Scheme Font&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "Gradle.Build lab2.executor": "Run",
+    "Gradle.lab2 [:org.example.Main.main()].executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/OOP/NSU_OOP_Java/lab2",
+    "onboarding.tips.debug.path": "D:/OOP/NSU_OOP_Java/lab2/untitled1/src/main/java/org/example/Main.java",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.Color Scheme Font"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\OOP\NSU_OOP_Java\lab2\src\main\java" />
@@ -135,6 +121,11 @@
           <url>file://$PROJECT_DIR$/untitled1/src/main/java/org/example/Main.java</url>
           <line>13</line>
           <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Model/Minefield/Minefield.java</url>
+          <line>64</line>
+          <option name="timeStamp" value="25" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -79,29 +79,32 @@ public class Minefield {
 
     public void addSafeMinesOnfield(Integer[] coords) {
 
-        List<Integer> idxWhereMine = sampleWithoutReplacement(bombCount, size1 * size2 - 1, coords[0] * size1 + coords[1]);
+        List<Integer> idxWhereMine = sampleWithoutReplacement(bombCount, size1 * size2, coords[0] * size1 + coords[1]);
         putBombs(cells, idxWhereMine);
         putNums(cells);
     }
 
     public static List<Integer> sampleWithoutReplacement(int k, int m, int guaranteeToBeeFree) {
-        if (k > m) {
-            throw new IllegalArgumentException("k cannot be greater than m-1");
+        if (k > m - 1) {
+            throw new IllegalArgumentException("k cannot be greater than m-1 (after exclusion)");
         }
+        if (guaranteeToBeeFree < 0 || guaranteeToBeeFree >= m) {
+            throw new IllegalArgumentException("guaranteeToBeeFree must be in [0, m-1)");
+        }
+
         Random random = new Random();
         List<Integer> result = new ArrayList<>();
-        int skipped = 0;
 
+        // Генерируем числа от 0 до m-1, исключая guaranteeToBeeFree
         for (int i = 0; i < k; i++) {
-            int next = random.nextInt(m - i - skipped);
-            if (next >= guaranteeToBeeFree) {
-                next++;  // "Пропускаем" guaranteeToBeeFree
-            }
+            int next;
+            do {
+                next = random.nextInt(m);  // Берем случайное число из [0, m-1]
+            } while (next == guaranteeToBeeFree || result.contains(next));  // Пропускаем guaranteeToBeeFree и уже выбранные
+
             result.add(next);
-            if (next < guaranteeToBeeFree) {
-                guaranteeToBeeFree--;  // Сдвигаем исключаемое число
-            }
         }
+
         return result;
     }
 
@@ -156,17 +159,17 @@ public class Minefield {
             return;
         }
 
-        unopenedCellsCount--;
-        cell.setOpened(true);
 
         Stack<Cell> stack = new Stack<Cell>();
         if (cell.getNum() == 0) {
             stack.push(cell);
         }
+        unopenedCellsCount--;
+        cell.setOpened(true);
         while (!stack.isEmpty()) {
 
             Cell curcell = stack.pop();
-            curcell.setOpened(true);
+
 
             if (curcell.getNum() != 0) {
                 continue;
@@ -181,11 +184,21 @@ public class Minefield {
 
                     // Проверяем, не вышли ли за границы массива
                     if (ni >= 0 && ni < size1 && nj >= 0 && nj < size2) {
-                        if (!cells[ni][nj].isOpened() && cells[ni][nj].getNum() == 0) {
-                            stack.push(cells[ni][nj]);
+
+                        if (cells[ni][nj].isOpened()) {
+                            continue;
                         }
+
+                        if (cells[ni][nj].getNum() == 0) {
+                            cells[ni][nj].setOpened(true);
+                            unopenedCellsCount--;
+                            stack.push(cells[ni][nj]);
+                            continue;
+                        }
+
                         unopenedCellsCount--;
                         cells[ni][nj].setOpened(true);
+
 
                     }
                 }
@@ -193,7 +206,6 @@ public class Minefield {
             }
         }
 
-        cell.setOpened(true);
 
     }
 

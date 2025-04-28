@@ -52,6 +52,7 @@ public class Model {
         minefield.act(i, j);
         isGamerLost(i, j);
         isGamerWon();
+        System.out.println(getMinefield().getUnopenedCellsCount());
     }
 
     private void isGamerLost(int i, int j) {
