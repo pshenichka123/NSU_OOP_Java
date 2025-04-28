@@ -158,6 +158,9 @@ public class Minefield {
             cell.setOpened(true);
             return;
         }
+        if (cell.isOpened()) {
+            return;
+        }
 
 
         Stack<Cell> stack = new Stack<Cell>();
