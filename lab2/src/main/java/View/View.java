@@ -185,7 +185,9 @@ public class View {
                             mainWindow.update(controller.getModel());
                         }
                         if (controller.getModel().isIsgamerwon()) {
+                            mainWindow.getGamePanel().getVisualMinefield();
                             showEndGameWindow(controller, mainWindow.getGamePanel().getTime());
+
                             mainWindow.stopTimer();
                         }
                         if (controller.getModel().isIsgamerlost()) {

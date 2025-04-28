@@ -1,9 +1,6 @@
 package Model.Minefield;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class Minefield {
     private Integer size1;
@@ -69,7 +66,10 @@ public class Minefield {
         cells = new Cell[size[0]][size[1]];
         for (int i = 0; i < size[0]; i++) {
             for (int j = 0; j < size[1]; j++) {
-                cells[i][j] = new Cell();
+                Vector<Integer> coords = new Vector<Integer>();
+                coords.add(i);
+                coords.add(j);
+                cells[i][j] = new Cell(coords);
             }
         }
 
@@ -79,28 +79,31 @@ public class Minefield {
 
     public void addSafeMinesOnfield(Integer[] coords) {
 
-        List<Integer> idxWhereMine = sampleWithoutReplacement(bombCount, size1 * size2, coords[0] * size1 + coords[1]);
+        List<Integer> idxWhereMine = sampleWithoutReplacement(bombCount, size1 * size2 - 1, coords[0] * size1 + coords[1]);
         putBombs(cells, idxWhereMine);
         putNums(cells);
     }
 
     public static List<Integer> sampleWithoutReplacement(int k, int m, int guaranteeToBeeFree) {
         if (k > m) {
-            throw new IllegalArgumentException("k cannot be greater than m");
+            throw new IllegalArgumentException("k cannot be greater than m-1");
         }
         Random random = new Random();
-        List<Integer> numbers = new ArrayList<Integer>();
-        for (int i = 0; i < m; i++) {
-            numbers.add(i);
-        }
-        numbers.remove((Object) guaranteeToBeeFree);
-        for (int i = 0; i < k; i++) {
-            int j = i + random.nextInt(m - i - 1); // Случайный индекс от i до m-1
-            Collections.swap(numbers, i, j);   // Меняем местами
-        }
-        return numbers.subList(0, k);
-    }
+        List<Integer> result = new ArrayList<>();
+        int skipped = 0;
 
+        for (int i = 0; i < k; i++) {
+            int next = random.nextInt(m - i - skipped);
+            if (next >= guaranteeToBeeFree) {
+                next++;  // "Пропускаем" guaranteeToBeeFree
+            }
+            result.add(next);
+            if (next < guaranteeToBeeFree) {
+                guaranteeToBeeFree--;  // Сдвигаем исключаемое число
+            }
+        }
+        return result;
+    }
 
     private void putBombs(Cell[][] Cells, List<Integer> mineIdx) {
         for (int idx : mineIdx) {
@@ -147,39 +150,51 @@ public class Minefield {
     }
 
     public void act(int i, int j) {
-
         Cell cell = cells[i][j];
         if (cell.isMineHere()) {
             cell.setOpened(true);
             return;
         }
-        cell.setOpened(true);
+
         unopenedCellsCount--;
-        //check opened nearby
+        cell.setOpened(true);
+
+        Stack<Cell> stack = new Stack<Cell>();
         if (cell.getNum() == 0) {
+            stack.push(cell);
+        }
+        while (!stack.isEmpty()) {
+
+            Cell curcell = stack.pop();
+            curcell.setOpened(true);
+
+            if (curcell.getNum() != 0) {
+                continue;
+            }
             for (int di = -1; di <= 1; di++) {
                 for (int dj = -1; dj <= 1; dj++) {
-                    // Пропускаем текущую клетку
                     if (di == 0 && dj == 0) {
                         continue;
                     }
-
-                    int ni = i + di; // Новый индекс строки
-                    int nj = j + dj; // Новый индекс столбца
+                    int ni = curcell.getCoords().get(0) + di; // Новый индекс строки
+                    int nj = curcell.getCoords().get(1) + dj; // Новый индекс столбца
 
                     // Проверяем, не вышли ли за границы массива
                     if (ni >= 0 && ni < size1 && nj >= 0 && nj < size2) {
-                        if (!cells[ni][nj].isOpened()) {
-                            act(ni, nj);
+                        if (!cells[ni][nj].isOpened() && cells[ni][nj].getNum() == 0) {
+                            stack.push(cells[ni][nj]);
                         }
+                        unopenedCellsCount--;
                         cells[ni][nj].setOpened(true);
 
                     }
                 }
 
             }
-
         }
+
+        cell.setOpened(true);
+
     }
 
     public void changeFlagState(int i, int j) {
