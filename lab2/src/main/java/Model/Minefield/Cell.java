@@ -1,8 +1,26 @@
 package Model.Minefield;
 
+import View.View;
+
+import java.util.Vector;
+
 public class Cell {
     private boolean opened = false;
     private boolean mineHere = false;
+
+    public Cell(Vector<Integer> integers) {
+        setCoords(integers);
+    }
+
+    public Vector<Integer> getCoords() {
+        return coords;
+    }
+
+    public void setCoords(Vector<Integer> coords) {
+        this.coords = coords;
+    }
+
+    private Vector<Integer> coords;
     private int num;
     private boolean isFlagsSet = false;
 
@@ -40,15 +58,17 @@ public class Cell {
 
     public void setMineHere(boolean mineHere) {
         this.mineHere = mineHere;
+        this.setNum(10);
     }
 
 
     public Cell() {
     }
 
-    Cell(boolean ismineHere, int num) {
+    Cell(boolean ismineHere, int num, Vector<Integer> coords) {
         setMineHere(ismineHere);
         setNum(num);
+        setCoords(coords);
     }
 
 

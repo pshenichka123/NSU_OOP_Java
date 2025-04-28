@@ -1,9 +1,6 @@
 package Model.Minefield;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class Minefield {
     private Integer size1;
@@ -69,7 +66,10 @@ public class Minefield {
         cells = new Cell[size[0]][size[1]];
         for (int i = 0; i < size[0]; i++) {
             for (int j = 0; j < size[1]; j++) {
-                cells[i][j] = new Cell();
+                Vector<Integer> cords = new Vector<Integer>();
+                cords.add(i);
+                cords.add(j);
+                cells[i][j] = new Cell(cords);
             }
         }
 
@@ -153,33 +153,45 @@ public class Minefield {
             cell.setOpened(true);
             return;
         }
-        cell.setOpened(true);
+
         unopenedCellsCount--;
-        //check opened nearby
+        cell.setOpened(true);
+
+        Stack<Cell> stack = new Stack<Cell>();
         if (cell.getNum() == 0) {
+            stack.push(cell);
+        }
+        while (!stack.isEmpty()) {
+
+            Cell curcell = stack.pop();
+            curcell.setOpened(true);
+
+            if (curcell.getNum() != 0) {
+                continue;
+            }
             for (int di = -1; di <= 1; di++) {
                 for (int dj = -1; dj <= 1; dj++) {
-                    // Пропускаем текущую клетку
                     if (di == 0 && dj == 0) {
                         continue;
                     }
-
-                    int ni = i + di; // Новый индекс строки
-                    int nj = j + dj; // Новый индекс столбца
+                    int ni = curcell.getCoords().getFirst() + di; // Новый индекс строки
+                    int nj = curcell.getCoords().get(1) + dj; // Новый индекс столбца
 
                     // Проверяем, не вышли ли за границы массива
                     if (ni >= 0 && ni < size1 && nj >= 0 && nj < size2) {
-                        if (!cells[ni][nj].isOpened()) {
-                            act(ni, nj);
+                        if (!cells[ni][nj].isOpened() && cells[ni][nj].getNum() == 0) {
+                            stack.push(cells[ni][nj]);
                         }
+                        unopenedCellsCount--;
                         cells[ni][nj].setOpened(true);
 
                     }
                 }
 
             }
-
         }
+
+        cell.setOpened(true);
     }
 
     public void changeFlagState(int i, int j) {
